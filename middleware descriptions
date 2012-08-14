@@ -1,0 +1,63 @@
+use ActionDispatch::Static
+	- serves static files under the public directory
+
+use Rack::Lock
+	- locks the rest of the app to a single thread
+
+use #<ActiveSupport::Cache::Strategy::LocalCache::Middleware:0x00000003a5bc40>
+	- flushes memory-based store used internally by Rails.cache
+
+use Rack::Runtime
+	- add X-Runtime to response header providing number of secoonds to process the rest of the app
+
+use Rack::MethodOverride
+	- sets the HTTP request method based on "_method" parameter
+
+use ActionDispatch::RequestId
+	- assigns unique ID to each request and X-Request-ID to response header
+
+use Rails::Rack::Logger
+	- logs the beginning of the request and flushes the log after request
+
+use ActionDispatch::ShowExceptions
+use ActionDispatch::DebugExceptions
+	- catch and display exceptions
+
+use ActionDispatch::RemoteIp
+	- caputres remote IP address
+
+use ActionDispatch::Reloader
+	- reloads classes in development mode
+
+use ActionDispatch::Callbacks
+	- provides generic callback hook for requests
+
+use ActiveRecord::ConnectionAdapters::ConnectionManagement
+	- clear active database connections
+
+use ActiveRecord::QueryCache
+	- resets database cache between requests
+
+use ActionDispatch::Cookies
+	- stores cookies in the browser
+
+use ActionDispatch::Session::CookieStore
+	- stores session in cookie to persist between requests
+
+use ActionDispatch::Flash
+	- persist flash messages between requests
+
+use ActionDispatch::ParamsParser
+	- parses different formatted requests (e.g. XML) into params hash
+
+use ActionDispatch::Head
+	- strips out the response body on HEAD requests
+
+use Rack::ConditionalGet
+use Rack::ETag
+	- strip response body if it's the same as a previous response
+
+use ActionDispatch::BestStandardsSupport
+	- use browser's latest rendering engine
+
+run Blog::Application.routes
